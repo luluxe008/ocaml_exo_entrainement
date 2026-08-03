@@ -1,5 +1,5 @@
 (* https://ocaml.org/exercises *)
-
+(* Utop peut pas trouver les fonctions définis ici :'-[ *)
 
 let print opt = match opt with 
     | None -> print_string "None"
@@ -26,5 +26,33 @@ let rec at i u = match u with
 
 print_newline ();;
 
+print_string "Le 2eme (2+1) élement de [1; 5; 8] est: "
 let str = Option.map string_of_int (at  2 [1; 5; 8]);;
 let () = print str;;
+
+
+let rec lenght u = match u with
+| [] -> 0
+| _ :: v -> 1 + lenght v;;
+
+(*presque *)
+let rec duplicate l n = 
+    let rec aux el n= match n with
+    | 0 -> []
+    | n ->  el :: aux el (n-1)
+    in 
+    match l with
+    | [] -> []
+    | x :: v -> aux x n :: duplicate v n;;
+
+
+(* Syntax Checker *)
+let identifier s= 
+    let rec is_correct c = match c with 
+    | 'a' .. 'z' | 'A' .. 'Z' | '-' | '0' .. '9' -> true
+    | _ -> false
+    in
+    let all = String.for_all is_correct s
+    in all && match String.get s 0 with 
+        |  'a' .. 'z' | 'A' .. 'Z' -> true
+        | _ -> false;;
